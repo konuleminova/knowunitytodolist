@@ -13,6 +13,11 @@ class TodoItem {
         userId: json['userId'],
         completed: json['completed']);
   }
+
+  @override
+  String toString() {
+    return 'TodoItem{id: $id, userId: $userId, title: $title, completed: $completed}';
+  }
 }
 
 List<TodoItem> todoList(List<dynamic> todoList) =>

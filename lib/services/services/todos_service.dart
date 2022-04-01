@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:knowunity_todo_list/model/TodoItem.dart';
@@ -8,13 +10,16 @@ import '../hooks/useApiConfig.dart';
 import '../hooks/useDioRequest.dart';
 import 'package:flutter/material.dart';
 
-ApiResponse<List<TodoItem>> usePhotoList(UniqueKey uniqueKey) {
+ApiResponse<List<TodoItem>> useTodosService(UniqueKey uniqueKey) {
   ApiConfig apiConfig = useApiConfig();
   DioConfig dioConfig = useMemoized(() {
     if (uniqueKey == null) return null;
     return DioConfig<List<TodoItem>>(
         path: apiConfig.BASE_URl,
         transformResponse: (Response response) {
+          print("repsonse1 ${response.data}");
+          print("repsonse2 ${todoList(response.data)}");
+
           return todoList(response.data);
         });
   }, [uniqueKey]);
