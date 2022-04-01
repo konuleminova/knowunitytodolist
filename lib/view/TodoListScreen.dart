@@ -14,6 +14,10 @@ class TodoListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("To-Do List"),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
       body: Container(
         padding: EdgeInsets.all(16),
         height: MediaQuery.of(context).size.height,
