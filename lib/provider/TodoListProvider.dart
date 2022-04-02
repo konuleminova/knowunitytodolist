@@ -17,4 +17,13 @@ class TodoListProvider with ChangeNotifier {
     print("todos ${todos.length}");
     notifyListeners();
   }
+
+  bool _isloading = true;
+
+  bool get isloading => _isloading;
+
+  set isloading(bool value) {
+    _isloading = value;
+    notifyListeners();
+  }
 }

@@ -18,18 +18,18 @@ class TodoListViewModel extends HookWidget {
         Provider.of<TodoListProvider>(context, listen: true);
     ValueNotifier<UniqueKey> _uniqueKey = useState<UniqueKey>(new UniqueKey());
     ApiResponse<List<TodoItem>> apiResponse = useTodosService(_uniqueKey.value);
-    ValueNotifier<bool> _isLoading = useState<bool>(true);
+   // ValueNotifier<bool> _isLoading = useState<bool>(true);
 
     useSideEffect(() {
       if (apiResponse.status == Status.Done) {
-        _isLoading.value = false;
+        provider.isloading = false;
         provider.todos.addAll(apiResponse.data);
       }
 
       return () {};
     }, [apiResponse]);
 
-    return _isLoading.value
+    return provider.isloading
         ? LoadingDialog()
         : TodoListScreen(
             todos: provider.todos,

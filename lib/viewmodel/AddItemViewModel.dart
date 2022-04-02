@@ -23,6 +23,10 @@ class AddItemViewModel extends HookWidget {
           completed: false,
           title: textEditingController.text ?? '');
       provider.addItemToList(addItemValue.value);
+      provider.isloading = true;
+      Future.delayed(Duration(milliseconds: 400), () {
+        provider.isloading = false;
+      });
       Navigator.of(context).pop();
     }, [addItemValue.value]);
     return AddTodoItemScreen(
