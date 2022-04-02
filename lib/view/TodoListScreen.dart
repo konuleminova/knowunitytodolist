@@ -17,10 +17,11 @@ class TodoListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) {
-            return AddItemViewModel();
-          }));
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AddItemViewModel();
+              });
         },
       ),
       body: Container(

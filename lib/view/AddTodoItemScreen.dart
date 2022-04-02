@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddTodoItemScreen extends StatelessWidget {
+class AddTodoItemScreen extends Dialog {
   TextEditingController textEditingController;
   Function addItemToListCallBack;
 
@@ -9,42 +9,45 @@ class AddTodoItemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Add- Item"),
-      ),
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: InkWell(
+    return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
-          height: 60,
-          color: Colors.blue,
-          alignment: Alignment.center,
-          child: Text(
-            'Add',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-        onTap: () {
-          addItemToListCallBack();
-        },
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: textEditingController,
-              decoration: InputDecoration(labelText: "Title"),
+          padding: EdgeInsets.all(16),
+          height: 270,
+          width: 180,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextField(
+                  controller: textEditingController,
+                  decoration: InputDecoration(labelText: "Task"),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                InkWell(
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Add',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                  onTap: () {
+                    addItemToListCallBack();
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: 16,
-            )
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
