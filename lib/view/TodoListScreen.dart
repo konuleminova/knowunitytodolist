@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:knowunity_todo_list/model/TodoItem.dart';
+import 'package:knowunity_todo_list/viewmodel/AddItemViewModel.dart';
 
 class TodoListScreen extends StatelessWidget {
   List<TodoItem> todos;
@@ -16,7 +16,12 @@ class TodoListScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return AddItemViewModel();
+          }));
+        },
       ),
       body: Container(
         padding: EdgeInsets.all(16),
