@@ -18,7 +18,7 @@ class AddItemViewModel extends HookWidget {
     final addItemToListCallBack = useCallback(() {
       addItemValue.value = new TodoItem(
           id: provider.todos.length > 0
-              ? provider.todos[provider.todos.length - 1].id + 1
+              ? provider.todos[0].id + 1
               : 1,
           completed: false,
           title: textEditingController.text ?? '');

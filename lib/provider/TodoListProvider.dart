@@ -13,7 +13,7 @@ class TodoListProvider with ChangeNotifier {
   List<TodoItem> todos = [];
 
   addItemToList(TodoItem item) {
-    todos.add(item);
+    todos.insert(0, item);
     print("todos ${todos.length}");
     notifyListeners();
   }
@@ -24,6 +24,15 @@ class TodoListProvider with ChangeNotifier {
 
   set isloading(bool value) {
     _isloading = value;
+    notifyListeners();
+  }
+
+  bool _scrollToBottom = false;
+
+  bool get scrollToBottom => _scrollToBottom;
+
+  setScrollToBottom(bool value) {
+    _scrollToBottom = value;
     notifyListeners();
   }
 }
