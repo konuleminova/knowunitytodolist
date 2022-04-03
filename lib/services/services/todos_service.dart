@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:knowunity_todo_list/model/TodoItem.dart';
@@ -17,9 +15,6 @@ ApiResponse<List<TodoItem>> useTodosService(UniqueKey uniqueKey) {
     return DioConfig<List<TodoItem>>(
         path: apiConfig.BASE_URl,
         transformResponse: (Response response) {
-          print("repsonse1 ${response.data}");
-          print("repsonse2 ${todoList(response.data)}");
-
           return todoList(response.data);
         });
   }, [uniqueKey]);

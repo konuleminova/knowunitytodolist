@@ -4,9 +4,8 @@ import 'package:knowunity_todo_list/viewmodel/AddItemViewModel.dart';
 
 class TodoListScreen extends StatelessWidget {
   List<TodoItem> todos;
-  ScrollController scrollController;
 
-  TodoListScreen({this.todos, this.scrollController});
+  TodoListScreen({this.todos});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class TodoListScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: ListView.builder(
-            controller: scrollController,
             shrinkWrap: true,
             itemCount: todos.length,
             itemBuilder: (BuildContext context, int index) {
@@ -53,6 +51,7 @@ class TodoListScreen extends StatelessWidget {
                     children: [
                       Text(
                         'ID: ${todos[index].id.toString() ?? ''}',
+                        style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 8,

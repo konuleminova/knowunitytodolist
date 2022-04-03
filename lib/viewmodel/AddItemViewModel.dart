@@ -16,18 +16,19 @@ class AddItemViewModel extends HookWidget {
     var addItemValue = useState<TodoItem>();
 
     final addItemToListCallBack = useCallback(() {
-      addItemValue.value = new TodoItem(
-          id: provider.todos.length > 0
-              ? provider.todos[0].id + 1
-              : 1,
-          completed: false,
-          title: textEditingController.text ?? '');
-      provider.addItemToList(addItemValue.value);
-      provider.isloading = true;
-      Future.delayed(Duration(milliseconds: 400), () {
-        provider.isloading = false;
-      });
-      Navigator.of(context).pop();
+      if (textEditingController.text.isNotEmpty) {
+        addItemValue.value = new TodoItem(
+            id: provider.todos.length > 0 ? provider.todos[0].id + 1 : 1,
+            completed: false,
+            title: textEditingController.text ?? '');
+
+        provider.addItemToList(addItemValue.value);
+        provider.isloading = true;
+        Future.delayed(Duration(milliseconds: 400), () {
+          provider.isloading = false;
+        });
+        Navigator.of(context).pop();
+      }
     }, [addItemValue.value]);
     return AddTodoItemScreen(
       addItemToListCallBack: addItemToListCallBack,

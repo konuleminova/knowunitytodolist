@@ -15,10 +15,9 @@ import 'package:provider/provider.dart';
 class TodoListViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    ScrollController scrollController =
-        useScrollController(initialScrollOffset: 0);
     TodoListProvider provider =
         Provider.of<TodoListProvider>(context, listen: true);
+
     ValueNotifier<UniqueKey> _uniqueKey = useState<UniqueKey>(new UniqueKey());
     ApiResponse<List<TodoItem>> apiResponse = useTodosService(_uniqueKey.value);
 
@@ -31,19 +30,9 @@ class TodoListViewModel extends HookWidget {
       return () {};
     }, [apiResponse]);
 
-    useSideEffect(() {
-      if (provider.scrollToBottom && scrollController.hasClients)
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-         /// scrollController.jumpTo(scrollController.position.maxScrollExtent);
-        });
-
-      return () {};
-    }, [provider.scrollToBottom]);
-
     return provider.isloading
         ? LoadingDialog()
         : TodoListScreen(
-            scrollController: scrollController,
             todos: provider.todos,
           );
   }
